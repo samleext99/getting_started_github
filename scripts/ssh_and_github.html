@@ -197,6 +197,9 @@ drwxr-xr-x 8 rsc2 rsc2  4096 Mar 28 11:55 ..
 -rw------- 1 rsc2 rsc2 12288 Mar 28 11:54 .authorised.swp
 -rw------- 1 rsc2 rsc2    95 Mar 24 11:51 authorized_keys
 -rw-r--r-- 1 rsc2 rsc2   444 Mar 25 10:25 known_hosts</code></pre>
+</div>
+<div id="create-a-ssh-key" class="section level1">
+<h1>3) Create a SSH key</h1>
 <p>I have keys (you may not) but these are for logging on to this computer through my terminal program on my Mac, not public and private keys for use with GitHub. Public keys end with .pub - if you don’t have a pair of keys which are the same numbers except one has a .pub at the end, probably need to create an ssk key pair. We do this through typing ‘ssh-keygen’:</p>
 <pre class="r"><code>ssh-keygen
 
@@ -223,6 +226,9 @@ drwxr-xr-x 8 rsc2 rsc2  4096 Mar 28 11:55 ..
 -rw------- 1 rsc2 rsc2  1675 Mar 28 11:56 id_rsa
 -rw-r--r-- 1 rsc2 rsc2   392 Mar 28 11:56 id_rsa.pub
 -rw-r--r-- 1 rsc2 rsc2   444 Mar 25 10:25 known_hosts</code></pre>
+</div>
+<div id="add-the-ssh-to-github" class="section level1">
+<h1>4) Add the ssh to github</h1>
 <p>Now open the contents of the public key to add to github using the command ‘cat .ssh/<your_key_name>.pub’. It will give you an output (mine starts with ssh-rsa and lots of letters and numbers but I have truncated so I’m not giving you my key pair!). And using Ctrl/Command +C copy the code.</p>
 <pre class="r"><code>cat .ssh/id_rsa.pub
 
