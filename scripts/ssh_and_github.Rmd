@@ -68,7 +68,7 @@ Enter same passphrase again:
 Your identification has been saved in /data/home/rsc2/.ssh/id_rsa.
 Your public key has been saved in /data/home/rsc2/.ssh/id_rsa.pub.
 The key fingerprint is:
-SHA256:CSr3TC+AjEBg0OWs6W3fgs4sKPzfm/qyU522BxHaSU4 rsc2@gem48
+SHA256:"......"
 The key's randomart image is:
 <insert picture>
 ```
