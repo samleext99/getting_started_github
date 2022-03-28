@@ -1,0 +1,119 @@
+---
+title: "Creating your ssh key and uploading to github"
+author: "Rich Cottrell"
+date: "28/03/2022"
+output: html_document
+---
+
+There are lots of resources online about how to add and use secure shell (ssh) keys and use them with github. Here are several that I have used in the past. 
+
+Checking for existing ssh keys: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/checking-for-existing-ssh-keys 
+
+Generating new ssh keys and adding to the agent: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account 
+
+Adding ssh keys to github: https://www.inmotionhosting.com/support/server/ssh/how-to-add-ssh-keys-to-your-github-account/
+
+
+To be honest sites have over-complicated what I wanted out of them. I only work with ssh and github, I don't really work through terminal except for some access and viewing folder commands. So when more learned people have helped me out, they have walked me through a few simpler steps which are a blend of the resources above. And I outline those . Although caution comes with this - I don't really understand what I am missing re the extra detail of adding ssh keys to agents etc. BUT I do work constantly with github and this process works for me.
+
+
+
+# 1) Open Terminal in RStudio
+
+The terminal operates in the language bash. You don't need to understand or be proficient at bash (I am not) to get gitHub and ssh keys working for you. On first clicking the terminal, you may see something like this:
+
+```{r, eval =FALSE}
+rsc2@gem48:~$ 
+```
+
+This is just telling you which folder you are in. All code below is typed after this dollar sign (so you don't need to write the 'XYZ@ABC' bit). If you type 'pwd' this will tell you the full directory (note mydirectory below is truncated because I am on a remote computer not my desktop)
+
+```{r, eval = FALSE}
+pwd
+
+output:
+/data/home/rsc2
+```
+
+# 2) Check for existing SSH keys 
+
+
+First we want to see if you have any public ssh keys already. These are the keys that you give github to identify the machine you are on and verify that this machine is authorised to interact with your github account. So in terminal type
+
+```{r, eval=FALSE}
+
+ls -al ~/.ssh
+
+Output:
+drwx------ 2 rsc2 rsc2  4096 Mar 28 11:56 .
+drwxr-xr-x 8 rsc2 rsc2  4096 Mar 28 11:55 ..
+-rw------- 1 rsc2 rsc2 12288 Mar 28 11:54 .authorised.swp
+-rw------- 1 rsc2 rsc2    95 Mar 24 11:51 authorized_keys
+-rw-r--r-- 1 rsc2 rsc2   444 Mar 25 10:25 known_hosts
+
+
+```
+
+I have keys (you may not) but these are for logging on to this computer through my terminal program on my Mac, not public and private keys for use with GitHub. Public keys end with .pub - if you don't have a pair of keys which are the same numbers except one has a .pub at the end, probably need to create an ssk key pair. We do this through typing 'ssh-keygen':
+
+```{r, eval=FALSE}
+ssh-keygen
+
+Output:
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/data/home/rsc2/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /data/home/rsc2/.ssh/id_rsa.
+Your public key has been saved in /data/home/rsc2/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:CSr3TC+AjEBg0OWs6W3fgs4sKPzfm/qyU522BxHaSU4 rsc2@gem48
+The key's randomart image is:
++---[RSA 2048]----+
+|=+ ..            |
+|o .o     E       |
+|.   o . * o      |
+|.o + . o *       |
+|. * + . S o      |
+| . + = o =       |
+|... o.= o o      |
+|o..+.+oo.. .     |
+|. .+=+B*o .      |
++----[SHA256]-----+
+```
+
+This has created a key pair for us. If we check the ssh key list again - you can see there are two id_rsa keys (one of which is .pub for use with GitHub).
+
+```{r, eval = FALSE}
+ls -al ~/.ssh
+
+Output
+drwx------ 2 rsc2 rsc2  4096 Mar 28 11:56 .
+drwxr-xr-x 8 rsc2 rsc2  4096 Mar 28 11:55 ..
+-rw------- 1 rsc2 rsc2 12288 Mar 28 11:54 .authorised.swp
+-rw------- 1 rsc2 rsc2    95 Mar 24 11:51 authorized_keys
+-rw------- 1 rsc2 rsc2  1675 Mar 28 11:56 id_rsa
+-rw-r--r-- 1 rsc2 rsc2   392 Mar 28 11:56 id_rsa.pub
+-rw-r--r-- 1 rsc2 rsc2   444 Mar 25 10:25 known_hosts
+
+
+
+```
+
+Now open the contents of the public key to add to github using the command 'cat .ssh/<your_key_name>.pub'. It will give you an output (mine starts with ssh-rsa and lots of letters and numbers but I have truncated so I'm not giving you my key pair!).  And using Ctrl/Command +C copy the code. 
+```{r}
+cat .ssh/id_rsa.pub
+
+
+Output: 
+ssh-rsa AAAAB3NzaC1y............
+
+```
+
+
+Then go to your github profile, click on your profile picture on the top right > Settings > SSH and GPG Keys > New SSH Key (Green, top right). 
+
+Add a name that helps identify which machine you use that key for (e.g. Sarah_UQ_MacBook), then paste the contents of the key in the space that it indicates and save. And your done. You should now be able to clone repositories and push and pull to them without needing a password (now deprecated by GitHub).
+
+
