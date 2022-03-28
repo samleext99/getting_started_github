@@ -70,17 +70,7 @@ Your public key has been saved in /data/home/rsc2/.ssh/id_rsa.pub.
 The key fingerprint is:
 SHA256:CSr3TC+AjEBg0OWs6W3fgs4sKPzfm/qyU522BxHaSU4 rsc2@gem48
 The key's randomart image is:
-+---[RSA 2048]----+
-|=+ ..            |
-|o .o     E       |
-|.   o . * o      |
-|.o + . o *       |
-|. * + . S o      |
-| . + = o =       |
-|... o.= o o      |
-|o..+.+oo.. .     |
-|. .+=+B*o .      |
-+----[SHA256]-----+
+<insert picture>
 ```
 
 This has created a key pair for us. If we check the ssh key list again - you can see there are two id_rsa keys (one of which is .pub for use with GitHub).
